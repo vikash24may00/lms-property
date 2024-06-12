@@ -1,0 +1,243 @@
+<!--
+  @description       : 
+  @author            : VIKASH MUNDARI
+  @group             : 
+  @last modified on  : 06-10-2024
+  @last modified by  : VIKASH MUNDARI
+-->
+<!-- 
+
+<template>
+    <lightning-card title="Property Management">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                
+                <lightning-input 
+                    label="Search" 
+                    type="text" 
+                    value={searchTerm} 
+                    onchange={handleInputChange} 
+                    class="slds-m-bottom_small">
+                </lightning-input>
+                <div class="slds-m-top_small slds-grid slds-wrap">
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Small" 
+                        value="Small" 
+                        checked={selectedFilters.Small} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Medium" 
+                        value="Medium" 
+                        checked={selectedFilters.Medium} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Large" 
+                        value="Large" 
+                        checked={selectedFilters.Large} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+                </div>
+                <div class="slds-m-top_medium slds-grid slds-wrap">
+                    <lightning-button 
+                        class="slds-m-right_small slds-m-bottom_small" 
+                        label="Search" 
+                        onclick={handleSearch}>
+                    </lightning-button>
+                    <lightning-button 
+                        class="slds-m-right_small slds-m-bottom_small" 
+                        label="Clear Filters" 
+                        onclick={clearFilter}>
+                    </lightning-button>
+                    <lightning-button 
+                        class="slds-m-bottom_small" 
+                        label="Add Property" 
+                        onclick={handleAddProperty}>
+                    </lightning-button>
+                </div>
+                <lightning-slider
+                    label="Price Range"
+                    value={priceRange}
+                    min="0"
+                    max={maxPrice}
+                    step="500"
+                    onchange={handlePriceChange}>
+                </lightning-slider>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <canvas id="propertyChart" width="200" height="100"></canvas>
+            </div>
+        </div>
+    </lightning-card>
+
+    <template if:true={showModal}>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{modalTitle}</h2>
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleModalClose}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning-record-edit-form
+                        object-api-name="Property__c"
+                        onsuccess={handleSuccess}
+                        onerror={handleError}>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Description__c"></lightning-input-field>
+                        <lightning-input-field field-name="Price__c"></lightning-input-field>
+                        <lightning-input-field field-name="Image__c"></lightning-input-field>
+                        <lightning-input-field field-name="PropertyType__c"></lightning-input-field>
+                        <div class="slds-m-top_medium slds-grid slds-wrap slds-grid_align-spread">
+                            <lightning-button variant="brand" type="submit" label="Save"></lightning-button>
+                            <lightning-button variant="neutral" label="Cancel" onclick={handleModalClose}></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+           
+        </section>
+    </template>
+</template>
+ -->
+
+ <template>
+    <!-- Main Card Container -->
+    <lightning-card title="Property Management">
+        <div class="slds-grid slds-wrap">
+            <!-- Left Column: Search and Filters -->
+            <div class="slds-col slds-size_1-of-2">
+                
+                <!-- Search Input Field -->
+                <lightning-input 
+                    label="Search" 
+                    type="text" 
+                    value={searchTerm} 
+                    onchange={handleInputChange} 
+                    class="slds-m-bottom_small">
+                </lightning-input>
+
+                <!-- Filter Checkboxes -->
+                <div class="slds-m-top_small slds-grid slds-wrap">
+                    <!-- Small Filter -->
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Small" 
+                        value="Small" 
+                        checked={selectedFilters.Small} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+
+                    <!-- Medium Filter -->
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Medium" 
+                        value="Medium" 
+                        checked={selectedFilters.Medium} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+
+                    <!-- Large Filter -->
+                    <lightning-input 
+                        class="slds-p-horizontal_small slds-m-bottom_small" 
+                        type="checkbox" 
+                        label="Large" 
+                        value="Large" 
+                        checked={selectedFilters.Large} 
+                        onchange={handleFilterChange}>
+                    </lightning-input>
+                </div>
+
+                <!-- Buttons for Search, Clear Filters, and Add Property -->
+                <div class="slds-m-top_medium slds-grid slds-wrap">
+                    <!-- Search Button -->
+                    <lightning-button 
+                        class="slds-m-right_small slds-m-bottom_small" 
+                        label="Search" 
+                        onclick={handleSearch}>
+                    </lightning-button>
+
+                    <!-- Clear Filters Button -->
+                    <lightning-button 
+                        class="slds-m-right_small slds-m-bottom_small" 
+                        label="Clear Filters" 
+                        onclick={clearFilter}>
+                    </lightning-button>
+
+                    <!-- Add Property Button -->
+                    <lightning-button 
+                        class="slds-m-bottom_small" 
+                        label="Add Property" 
+                        onclick={handleAddProperty}>
+                    </lightning-button>
+                </div>
+
+                <!-- Price Range Slider -->
+                <lightning-slider
+                    label="Price Range"
+                    value={priceRange}
+                    min="0"
+                    max={maxPrice}
+                    step="500"
+                    onchange={handlePriceChange}>
+                </lightning-slider>
+            </div>
+
+            <!-- Right Column: Chart -->
+            <div class="slds-col slds-size_1-of-2">
+                <!-- Canvas Element for Chart.js -->
+                <canvas id="propertyChart" width="200" height="100"></canvas>
+            </div>
+        </div>
+    </lightning-card>
+
+    <!-- Modal for Adding or Editing a Property -->
+    <template if:true={showModal}>
+        <!-- Modal Backdrop -->
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        <!-- Modal Container -->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- Modal Header -->
+                <header class="slds-modal__header">
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{modalTitle}</h2>
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={handleModalClose}>
+                        <lightning-icon icon-name="utility:close" alternative-text="Close"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </header>
+                <!-- Modal Content -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <!-- Record Edit Form for Property__c Object -->
+                    <lightning-record-edit-form
+                        object-api-name="Property__c"
+                        onsuccess={handleSuccess}
+                        onerror={handleError}>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Description__c"></lightning-input-field>
+                        <lightning-input-field field-name="Price__c"></lightning-input-field>
+                        <lightning-input-field field-name="Image__c"></lightning-input-field>
+                        <lightning-input-field field-name="PropertyType__c"></lightning-input-field>
+                        <!-- Save and Cancel Buttons -->
+                        <div class="slds-m-top_medium slds-grid slds-wrap slds-grid_align-spread">
+                            <lightning-button variant="brand" type="submit" label="Save"></lightning-button>
+                            <lightning-button variant="neutral" label="Cancel" onclick={handleModalClose}></lightning-button>
+                        </div>
+                    </lightning-record-edit-form>
+                </div>
+            </div>
+        </section>
+    </template>
+</template>

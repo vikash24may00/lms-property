@@ -1,0 +1,195 @@
+<!--
+  @description       : 
+  @author            : VIKASH MUNDARI
+  @group             : 
+  @last modified on  : 06-10-2024
+  @last modified by  : VIKASH MUNDARI
+-->
+<!-- 
+<template>
+    <lightning-card title="Property Listings">
+        <div class="slds-m-around_medium">
+            <template if:true={propertyItems}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={propertyItems} for:item="property">
+                        <div key={property.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
+                            <lightning-card title={property.Name} icon-name="standard:house">
+                                <div class="slds-p-around_medium">
+                                    <div class="slds-text-align_center">
+                                        <img src={property.Image__c} alt={property.Name} class="property-image" style="max-width:100%; max-height:200px;">
+                                    </div>
+                                    <p class="slds-m-top_small"><b>Description:</b> {property.Description__c}</p>
+                                    <p><b>Price:</b> <lightning-formatted-number value={property.Price__c} format-style="currency" currency-code="INR"></lightning-formatted-number></p>
+                                    <p><b>Property Type:</b> {property.PropertyType__c}</p>
+                                    <div class="slds-m-top_small slds-grid slds-wrap slds-grid_align-spread">
+                                        <lightning-button 
+                                            class="slds-m-right_small" 
+                                            label="Edit" 
+                                            data-id={property.Id} 
+                                            onclick={handleEditProperty}>
+                                        </lightning-button>
+                                        <lightning-button 
+                                            label="Delete" 
+                                            variant="destructive" 
+                                            data-id={property.Id} 
+                                            onclick={confirmDeleteProperty}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:true={error}>
+                <c-error-panel errors={error}></c-error-panel>
+            </template>
+        </div>
+    </lightning-card>
+
+    <template if:true={isEditModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeEditModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Edit Property</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <lightning-input label="Name" value={editProperty.Name} data-id="Name" onchange={handleInputChange}></lightning-input>
+                    <lightning-input label="Description" value={editProperty.Description__c} data-id="Description__c" onchange={handleInputChange}></lightning-input>
+                    <lightning-input label="Price" value={editProperty.Price__c} data-id="Price__c" onchange={handleInputChange} type="number"></lightning-input>
+                    <lightning-input label="Property Type" value={editProperty.PropertyType__c} data-id="PropertyType__c" onchange={handleInputChange}></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeEditModal}></lightning-button>
+                    <lightning-button variant="brand" label="Save" onclick={saveProperty}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <template if:true={isDeleteModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeDeleteModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Confirm Delete</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p>Are you sure you want to delete this property?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeDeleteModal}></lightning-button>
+                    <lightning-button variant="destructive" label="Delete" onclick={handleDeleteProperty}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template> -->
+
+
+<template>
+    <!-- Card to display property listings -->
+    <lightning-card title="Property Listings">
+        <div class="slds-m-around_medium">
+            <!-- Conditional rendering of property items if they exist -->
+            <template if:true={propertyItems}>
+                <div class="slds-grid slds-wrap slds-gutters">
+                    <template for:each={propertyItems} for:item="property">
+                        <div key={property.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-3 slds-p-around_small">
+                            <lightning-card title={property.Name} icon-name="standard:house">
+                                <div class="slds-p-around_medium">
+                                    <!-- Centered image for the property -->
+                                    <div class="slds-text-align_center">
+                                        <img src={property.Image__c} alt={property.Name} class="property-image" style="max-width:100%; max-height:200px;">
+                                    </div>
+                                    <!-- Property details -->
+                                    <p class="slds-m-top_small"><b>Description:</b> {property.Description__c}</p>
+                                    <p><b>Price:</b> <lightning-formatted-number value={property.Price__c} format-style="currency" currency-code="INR"></lightning-formatted-number></p>
+                                    <p><b>Property Type:</b> {property.PropertyType__c}</p>
+                                    <!-- Edit and Delete buttons -->
+                                    <div class="slds-m-top_small slds-grid slds-wrap slds-grid_align-spread">
+                                        <lightning-button 
+                                            class="slds-m-right_small" 
+                                            label="Edit" 
+                                            data-id={property.Id} 
+                                            onclick={handleEditProperty}>
+                                        </lightning-button>
+                                        <lightning-button 
+                                            label="Delete" 
+                                            variant="destructive" 
+                                            data-id={property.Id} 
+                                            onclick={confirmDeleteProperty}>
+                                        </lightning-button>
+                                    </div>
+                                </div>
+                            </lightning-card>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <!-- Error handling template -->
+            <template if:true={error}>
+                <c-error-panel errors={error}></c-error-panel>
+            </template>
+        </div>
+    </lightning-card>
+
+    <!-- Edit Modal -->
+    <template if:true={isEditModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeEditModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Edit Property</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Input fields for editing property -->
+                    <lightning-input label="Name" value={editProperty.Name} data-id="Name" onchange={handleInputChange}></lightning-input>
+                    <lightning-input label="Description" value={editProperty.Description__c} data-id="Description__c" onchange={handleInputChange}></lightning-input>
+                    <lightning-input label="Price" value={editProperty.Price__c} data-id="Price__c" onchange={handleInputChange} type="number"></lightning-input>
+                    <lightning-input label="Property Type" value={editProperty.PropertyType__c} data-id="PropertyType__c" onchange={handleInputChange}></lightning-input>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeEditModal}></lightning-button>
+                    <lightning-button variant="brand" label="Save" onclick={saveProperty}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Delete Confirmation Modal -->
+    <template if:true={isDeleteModalOpen}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeDeleteModal}>
+                        <lightning-icon icon-name="utility:close" alternative-text="close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium">Confirm Delete</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p>Are you sure you want to delete this property?</p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeDeleteModal}></lightning-button>
+                    <lightning-button variant="destructive" label="Delete" onclick={handleDeleteProperty}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

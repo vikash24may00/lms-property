@@ -1,0 +1,14 @@
+<!--
+  @description       : 
+  @author            : VIKASH MUNDARI
+  @group             : 
+  @last modified on  : 06-07-2024
+  @last modified by  : VIKASH MUNDARI
+-->
+<template>
+    <div class="error-panel">
+        <template for:each={errors} for:item="error">
+            <p key={error} class="error-message">{error}</p>
+        </template>
+    </div>
+</template>
